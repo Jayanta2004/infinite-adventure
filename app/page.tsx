@@ -137,20 +137,24 @@ export default function Game() {
   // Start Screen
   if (!currentContent?.description && history.length === 0) {
     return (
-      <div className="flex flex-col h-screen items-center justify-center bg-gradient-to-br from-zinc-950 via-blue-950 to-zinc-950 text-white gap-8 font-mono relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)] animate-pulse" />
+      <div className="flex flex-col h-screen items-center justify-center bg-gradient-to-br from-purple-950 via-black to-indigo-950 text-white gap-8 font-mono relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(139,0,139,0.2),transparent_50%)] animate-pulse" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(75,0,130,0.15),transparent_50%)]" style={{animation: 'ghostFloat 6s ease-in-out infinite'}} />
+        <div className="absolute top-20 left-20 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl" style={{animation: 'ghostFloat 7s ease-in-out infinite'}} />
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl" style={{animation: 'ghostFloat 9s ease-in-out infinite 2s'}} />
         <div className="z-10 text-center space-y-6">
-          <h1 className="text-6xl font-black tracking-tighter bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in">
+          <h1 className="text-6xl font-black tracking-tighter bg-gradient-to-r from-purple-400 via-fuchsia-300 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in" style={{animation: 'eerieGlow 3s ease-in-out infinite'}}>
             INFINITE ADVENTURE
           </h1>
-          <p className="text-zinc-400 text-sm tracking-widest uppercase">Neural Link Ready</p>
+          <p className="text-purple-400 text-sm tracking-widest uppercase animate-pulse">⚠️ Neural Link Corrupted ⚠️</p>
         </div>
         <button 
           onClick={() => handleChoice("START_GAME")} 
-          className="z-10 group relative px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-xl font-bold text-xl transition-all duration-300 shadow-lg shadow-blue-500/50 hover:shadow-blue-400/70 hover:scale-105 active:scale-95"
+          className="z-10 group relative px-10 py-5 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 rounded-xl font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/50 hover:shadow-purple-400/70 hover:scale-105 active:scale-95"
+          style={{animation: 'eerieGlow 2s ease-in-out infinite'}}
         >
           <span className="relative z-10">ENTER SIMULATION</span>
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 blur transition-opacity" />
+          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400 to-fuchsia-400 opacity-0 group-hover:opacity-20 blur transition-opacity" />
         </button>
       </div>
     );
@@ -181,13 +185,15 @@ export default function Game() {
 
   // Main Game UI
   return (
-    <div className={`min-h-screen bg-zinc-950 text-zinc-100 font-mono flex flex-col items-center relative overflow-hidden transition-all duration-300 ${damageFlash ? 'bg-red-900 scale-[0.99]' : ''}`}>
+    <div className={`min-h-screen bg-black text-zinc-100 font-mono flex flex-col items-center relative overflow-hidden transition-all duration-300 ${damageFlash ? 'bg-red-900 scale-[0.99]' : ''}`}>
       
       {/* Background Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-950 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/90 to-zinc-950/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.05),transparent_50%)]" />
+        <div className="w-full h-full bg-gradient-to-br from-purple-950/50 via-black to-indigo-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-purple-950/30 to-black" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(139,0,139,0.15),transparent_50%)]" style={{animation: 'hauntedPulse 8s ease-in-out infinite'}} />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" style={{animation: 'ghostFloat 10s ease-in-out infinite'}} />
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-500/5 rounded-full blur-3xl" style={{animation: 'ghostFloat 12s ease-in-out infinite 3s'}} />
       </div>
 
       {/* Content Layer */}

@@ -1,6 +1,6 @@
-# 🎮 Infinite Adventure
+# 👻 Infinite Adventure
 
-> An AI-powered infinite text adventure game with dynamic storytelling, real-time image generation, and persistent game saves.
+> An AI-powered infinite text adventure game with dynamic storytelling, haunted atmosphere, and persistent game saves in a bizarre corrupted simulation.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
@@ -11,8 +11,9 @@
 - 🤖 **AI-Powered Storytelling** - Dynamic narrative generation using AI
 - 💾 **Auto-Save System** - Progress automatically saved to Supabase
 - ❤️ **Health System** - Dynamic HP tracking with visual feedback
-- 🎒 **Inventory Management** - Collect and manage items throughout your journey
-- 🌙 **Cyberpunk UI** - Modern, immersive interface with smooth animations
+- 🎒 **Inventory Management** - Collect and use items throughout your journey
+- 🏆 **Achievement System** - Unlock achievements as you progress
+- 👻 **Haunted UI** - Eerie, otherworldly interface with ghostly animations and corrupted aesthetics
 - 📱 **Responsive Design** - Play on any device
 
 ## 🚀 Getting Started
