@@ -271,7 +271,7 @@ export default function Game() {
             <div className="w-56 text-right space-y-2">
                 <div className="text-xs text-red-400 uppercase tracking-[0.2em] font-semibold flex items-center justify-end gap-2">
                   <span className="text-lg">❤️</span>
-                  Vital Signs
+                  Life Force
                   <span className="text-white font-bold">{Math.max(0, hp)}%</span>
                 </div>
                 <div className="h-5 bg-zinc-900/80 rounded-full overflow-hidden border-2 border-zinc-700/50 shadow-inner backdrop-blur-sm">
