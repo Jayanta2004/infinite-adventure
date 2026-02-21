@@ -35,6 +35,7 @@ export default function Game() {
   const [turnCount, setTurnCount] = useState(0);
   const [achievements, setAchievements] = useState<string[]>([]);
   const [showStats, setShowStats] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   // 3. MOUNT: Restore Session or Create New
   useEffect(() => {
@@ -134,10 +135,29 @@ export default function Game() {
 
   if (!isLoaded) return <div className="h-screen bg-zinc-950 text-zinc-500 flex items-center justify-center font-mono">Loading Neural Link...</div>;
 
+  // Background Music Component
+  const BackgroundMusic = () => (
+    <>
+      <iframe
+        src={`https://www.youtube.com/embed/CDWtH8eHeEU?autoplay=1&loop=1&playlist=CDWtH8eHeEU&controls=0&mute=${isMuted ? 1 : 0}`}
+        allow="autoplay"
+        style={{ display: 'none' }}
+      />
+      <button
+        onClick={() => setIsMuted(!isMuted)}
+        className="fixed bottom-6 right-6 z-50 p-3 bg-purple-900/80 hover:bg-purple-800/80 border-2 border-purple-500/30 rounded-full transition-all duration-300 backdrop-blur-sm shadow-lg hover:scale-110"
+        style={{ boxShadow: '0 0 20px rgba(139, 0, 139, 0.5)' }}
+      >
+        <span className="text-2xl">{isMuted ? '🔇' : '🔊'}</span>
+      </button>
+    </>
+  );
+
   // Start Screen
   if (!currentContent?.description && history.length === 0) {
     return (
       <div className="vignette flex flex-col h-screen items-center justify-center bg-black text-white gap-8 font-mono relative overflow-hidden">
+        <BackgroundMusic />
         {/* Fog layers */}
         <div className="fog-layer" style={{top: '10%'}} />
         <div className="fog-layer" style={{top: '40%'}} />
@@ -159,7 +179,7 @@ export default function Game() {
         <div className="absolute top-1/2 left-1/4 text-purple-500/20 text-xs" style={{animation: 'whisper 12s ease-in-out infinite 6s'}}>...trapped...</div>
         
         <div className="z-10 text-center space-y-6 px-4">
-          <div className="mb-4 text-7xl" style={{animation: 'creepyFloat 4s ease-in-out infinite', filter: 'drop-shadow(0 0 20px rgba(139, 0, 139, 0.8))'}}>👻</div>
+          <div className="mb-4 text-8xl" style={{animation: 'creepyFloat 4s ease-in-out infinite', filter: 'brightness(2) contrast(1.2) drop-shadow(0 0 40px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.9))', opacity: 1}}>👻</div>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter bg-gradient-to-b from-purple-300 via-purple-500 to-black bg-clip-text text-transparent drop-shadow-2xl flicker" style={{textShadow: '0 0 40px rgba(139, 0, 139, 0.8), 0 0 80px rgba(75, 0, 75, 0.5)', filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.9))'}}>
             INFINITE ADVENTURE
           </h1>
@@ -179,8 +199,8 @@ export default function Game() {
           <div className="absolute inset-0 rounded-xl bg-purple-500/10 opacity-0 group-hover:opacity-100 blur transition-opacity" />
         </button>
         
-        <div className="z-10 text-xs text-zinc-700 mt-8 flex items-center gap-2 flicker">
-          <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" style={{boxShadow: '0 0 10px rgba(220, 38, 38, 0.8)'}}></span>
+        <div className="z-10 text-xs text-zinc-400 mt-8 flex items-center gap-2 flicker">
+          <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{boxShadow: '0 0 10px rgba(220, 38, 38, 0.8)'}}></span>
           SYSTEM STATUS: CRITICAL FAILURE
         </div>
       </div>
@@ -191,6 +211,7 @@ export default function Game() {
   if (hp <= 0 && !isLoading) {
     return (
       <div className="vignette flex flex-col h-screen items-center justify-center bg-black text-white font-mono p-4 text-center z-50 relative overflow-hidden">
+        <BackgroundMusic />
         {/* Blood drip effect */}
         <div className="absolute top-0 left-1/4 w-1 h-full bg-gradient-to-b from-red-900 to-transparent opacity-30" style={{animation: 'bloodDrip 8s ease-in infinite'}} />
         <div className="absolute top-0 right-1/3 w-1 h-full bg-gradient-to-b from-red-900 to-transparent opacity-30" style={{animation: 'bloodDrip 10s ease-in infinite 2s'}} />
@@ -227,6 +248,7 @@ export default function Game() {
   // Main Game UI
   return (
     <div className={`vignette min-h-screen bg-black text-zinc-100 font-mono flex flex-col items-center relative overflow-hidden transition-all duration-300 ${damageFlash ? 'bg-red-950 scale-[0.99]' : ''}`}>
+      <BackgroundMusic />
       
       {/* Fog layers */}
       <div className="fog-layer" style={{top: '20%', zIndex: 5}} />
@@ -251,7 +273,7 @@ export default function Game() {
                   <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
                   Location
                 </h1>
-                <h2 className="text-4xl font-black drop-shadow-2xl bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent">
+                <h2 className="text-4xl font-black drop-shadow-2xl text-purple-300" style={{textShadow: '0 0 20px rgba(216, 180, 254, 0.8), 0 2px 4px rgba(0, 0, 0, 0.9)'}}>
                   {currentContent?.locationName || "..."}
                 </h2>
                 <div className="flex items-center gap-4 text-xs text-zinc-500">
