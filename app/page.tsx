@@ -137,25 +137,52 @@ export default function Game() {
   // Start Screen
   if (!currentContent?.description && history.length === 0) {
     return (
-      <div className="flex flex-col h-screen items-center justify-center bg-gradient-to-br from-purple-950 via-black to-indigo-950 text-white gap-8 font-mono relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(139,0,139,0.2),transparent_50%)] animate-pulse" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(75,0,130,0.15),transparent_50%)]" style={{animation: 'ghostFloat 6s ease-in-out infinite'}} />
-        <div className="absolute top-20 left-20 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl" style={{animation: 'ghostFloat 7s ease-in-out infinite'}} />
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl" style={{animation: 'ghostFloat 9s ease-in-out infinite 2s'}} />
-        <div className="z-10 text-center space-y-6">
-          <h1 className="text-6xl font-black tracking-tighter bg-gradient-to-r from-purple-400 via-fuchsia-300 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in" style={{animation: 'eerieGlow 3s ease-in-out infinite'}}>
+      <div className="vignette flex flex-col h-screen items-center justify-center bg-black text-white gap-8 font-mono relative overflow-hidden">
+        {/* Fog layers */}
+        <div className="fog-layer" style={{top: '10%'}} />
+        <div className="fog-layer" style={{top: '40%'}} />
+        <div className="fog-layer" style={{top: '70%'}} />
+        
+        {/* Dark atmospheric background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(75,0,75,0.4),transparent_40%)]" style={{animation: 'creepyFloat 15s ease-in-out infinite'}} />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(50,0,80,0.3),transparent_45%)]" style={{animation: 'creepyFloat 18s ease-in-out infinite 5s'}} />
+        
+        {/* Floating ghost orbs */}
+        <div className="absolute top-10 left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl" style={{animation: 'creepyFloat 20s ease-in-out infinite'}} />
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-900/15 rounded-full blur-3xl" style={{animation: 'creepyFloat 25s ease-in-out infinite 3s'}} />
+        <div className="absolute top-1/3 right-1/4 w-32 h-32 bg-indigo-900/10 rounded-full blur-3xl" style={{animation: 'creepyFloat 22s ease-in-out infinite 7s'}} />
+        
+        {/* Whispers effect */}
+        <div className="absolute top-1/4 left-1/3 text-purple-500/20 text-xs" style={{animation: 'whisper 8s ease-in-out infinite'}}>...help...</div>
+        <div className="absolute bottom-1/3 right-1/4 text-purple-500/20 text-xs" style={{animation: 'whisper 10s ease-in-out infinite 3s'}}>...escape...</div>
+        <div className="absolute top-1/2 left-1/4 text-purple-500/20 text-xs" style={{animation: 'whisper 12s ease-in-out infinite 6s'}}>...trapped...</div>
+        
+        <div className="z-10 text-center space-y-6 px-4">
+          <div className="mb-4 text-7xl" style={{animation: 'creepyFloat 4s ease-in-out infinite', filter: 'drop-shadow(0 0 20px rgba(139, 0, 139, 0.8))'}}>👻</div>
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter bg-gradient-to-b from-purple-300 via-purple-500 to-black bg-clip-text text-transparent drop-shadow-2xl flicker" style={{textShadow: '0 0 40px rgba(139, 0, 139, 0.8), 0 0 80px rgba(75, 0, 75, 0.5)', filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.9))'}}>
             INFINITE ADVENTURE
           </h1>
-          <p className="text-purple-400 text-sm tracking-widest uppercase animate-pulse">⚠️ Neural Link Corrupted ⚠️</p>
+          <p className="text-purple-400 text-sm md:text-base tracking-widest uppercase" style={{animation: 'whisper 4s ease-in-out infinite', textShadow: '0 0 15px rgba(139, 0, 139, 1)'}}>⚠️ Neural Link Corrupted ⚠️</p>
+          <p className="text-zinc-500 text-xs md:text-sm max-w-md mx-auto leading-relaxed mt-4" style={{textShadow: '0 0 10px rgba(0, 0, 0, 0.9)'}}>Your consciousness has been trapped in a corrupted simulation. Reality glitches. Shadows whisper. Every choice echoes through the void...</p>
         </div>
+        
         <button 
           onClick={() => handleChoice("START_GAME")} 
-          className="z-10 group relative px-10 py-5 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 rounded-xl font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/50 hover:shadow-purple-400/70 hover:scale-105 active:scale-95"
-          style={{animation: 'eerieGlow 2s ease-in-out infinite'}}
+          className="z-10 group relative px-10 py-5 bg-gradient-to-r from-purple-900 to-purple-950 hover:from-purple-800 hover:to-purple-900 rounded-xl font-bold text-xl transition-all duration-300 border-2 border-purple-500/30 hover:border-purple-400/50"
+          style={{animation: 'shadowPulse 3s ease-in-out infinite', boxShadow: '0 0 30px rgba(139, 0, 139, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.8)'}}
         >
-          <span className="relative z-10">ENTER SIMULATION</span>
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400 to-fuchsia-400 opacity-0 group-hover:opacity-20 blur transition-opacity" />
+          <span className="relative z-10 flex items-center gap-2" style={{textShadow: '0 0 10px rgba(139, 0, 139, 0.8)'}}>
+            <span className="text-2xl">▶</span>
+            ENTER SIMULATION
+          </span>
+          <div className="absolute inset-0 rounded-xl bg-purple-500/10 opacity-0 group-hover:opacity-100 blur transition-opacity" />
         </button>
+        
+        <div className="z-10 text-xs text-zinc-700 mt-8 flex items-center gap-2 flicker">
+          <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" style={{boxShadow: '0 0 10px rgba(220, 38, 38, 0.8)'}}></span>
+          SYSTEM STATUS: CRITICAL FAILURE
+        </div>
       </div>
     );
   }
@@ -163,19 +190,33 @@ export default function Game() {
   // Game Over Screen
   if (hp <= 0 && !isLoading) {
     return (
-      <div className="flex flex-col h-screen items-center justify-center bg-gradient-to-br from-red-950 via-zinc-950 to-red-950 text-white space-y-8 font-mono p-6 text-center z-50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.15),transparent_50%)] animate-pulse" />
-        <div className="z-10 space-y-6">
-          <div className="text-8xl mb-4 animate-bounce">💀</div>
-          <h1 className="text-7xl font-black text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.8)] animate-pulse">TERMINATED</h1>
-          <p className="text-xl text-red-200 max-w-lg leading-relaxed">{currentContent?.description}</p>
+      <div className="vignette flex flex-col h-screen items-center justify-center bg-black text-white font-mono p-4 text-center z-50 relative overflow-hidden">
+        {/* Blood drip effect */}
+        <div className="absolute top-0 left-1/4 w-1 h-full bg-gradient-to-b from-red-900 to-transparent opacity-30" style={{animation: 'bloodDrip 8s ease-in infinite'}} />
+        <div className="absolute top-0 right-1/3 w-1 h-full bg-gradient-to-b from-red-900 to-transparent opacity-30" style={{animation: 'bloodDrip 10s ease-in infinite 2s'}} />
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-red-950/50 via-black to-black" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,0,0,0.3),transparent_40%)]" style={{animation: 'creepyFloat 8s ease-in-out infinite'}} />
+        
+        <div className="z-10 space-y-4 max-w-2xl">
+          <div className="text-7xl md:text-8xl" style={{animation: 'glitch 0.5s infinite', filter: 'drop-shadow(0 0 30px rgba(220, 38, 38, 0.9))'}}>💀</div>
+          <h1 className="text-6xl md:text-7xl font-black text-red-600 glitch-text" style={{textShadow: '0 0 30px rgba(220, 38, 38, 1), 0 0 60px rgba(139, 0, 0, 0.8)'}}>
+            TERMINATED
+          </h1>
+          <div className="h-1 w-48 md:w-64 bg-black mx-auto rounded-full overflow-hidden border border-red-900">
+            <div className="h-full w-full bg-gradient-to-r from-transparent via-red-600 to-transparent" style={{animation: 'whisper 2s ease-in-out infinite'}} />
+          </div>
+          <p className="text-base md:text-lg text-red-300 max-w-lg leading-relaxed px-4" style={{textShadow: '0 0 10px rgba(0, 0, 0, 0.9)'}}>{currentContent?.description}</p>
+          <p className="text-sm text-red-500/70 italic flicker">Your neural link has been severed...</p>
+          <p className="text-xs text-zinc-700" style={{animation: 'whisper 6s ease-in-out infinite'}}>...the void consumes all...</p>
         </div>
         <button 
           onClick={wipeSaveAndRestart} 
-          className="z-10 group px-8 py-4 border-2 border-red-500 text-red-500 hover:bg-red-900 hover:text-white font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/50 active:scale-95"
+          className="z-10 group px-6 md:px-8 py-3 md:py-4 mt-6 border-2 border-red-900 bg-black text-red-500 hover:bg-red-950 hover:text-red-400 font-bold rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-sm text-sm md:text-base"
+          style={{boxShadow: '0 0 20px rgba(139, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.9)'}}
         >
           <span className="flex items-center gap-2">
-            <span>🔄</span>
+            <span className="text-lg md:text-xl">🔄</span>
             WIPE MEMORY & REBOOT
           </span>
         </button>
@@ -185,15 +226,19 @@ export default function Game() {
 
   // Main Game UI
   return (
-    <div className={`min-h-screen bg-black text-zinc-100 font-mono flex flex-col items-center relative overflow-hidden transition-all duration-300 ${damageFlash ? 'bg-red-900 scale-[0.99]' : ''}`}>
+    <div className={`vignette min-h-screen bg-black text-zinc-100 font-mono flex flex-col items-center relative overflow-hidden transition-all duration-300 ${damageFlash ? 'bg-red-950 scale-[0.99]' : ''}`}>
+      
+      {/* Fog layers */}
+      <div className="fog-layer" style={{top: '20%', zIndex: 5}} />
+      <div className="fog-layer" style={{top: '60%', zIndex: 5}} />
       
       {/* Background Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-br from-purple-950/50 via-black to-indigo-950/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-purple-950/30 to-black" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(139,0,139,0.15),transparent_50%)]" style={{animation: 'hauntedPulse 8s ease-in-out infinite'}} />
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" style={{animation: 'ghostFloat 10s ease-in-out infinite'}} />
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-500/5 rounded-full blur-3xl" style={{animation: 'ghostFloat 12s ease-in-out infinite 3s'}} />
+        <div className="w-full h-full bg-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(75,0,75,0.25),transparent_40%)]" style={{animation: 'creepyFloat 15s ease-in-out infinite'}} />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-purple-900/10 rounded-full blur-3xl" style={{animation: 'creepyFloat 18s ease-in-out infinite'}} />
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-purple-950/15 rounded-full blur-3xl" style={{animation: 'creepyFloat 22s ease-in-out infinite 5s'}} />
       </div>
 
       {/* Content Layer */}
@@ -273,10 +318,12 @@ export default function Game() {
         )}
 
         {/* Narrative */}
-        <div className="group min-h-[140px] bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-8 shadow-2xl hover:border-zinc-700/50 transition-all duration-300">
-          <p className="text-lg leading-relaxed text-zinc-100 drop-shadow-md">
+        <div className="group min-h-[140px] bg-black/60 backdrop-blur-md border border-purple-900/30 rounded-2xl p-8 shadow-2xl hover:border-purple-800/40 transition-all duration-300 relative overflow-hidden"
+          style={{boxShadow: '0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(75, 0, 75, 0.1)'}}>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-950/10 via-transparent to-purple-950/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <p className="text-lg leading-relaxed text-zinc-300 drop-shadow-md relative z-10" style={{textShadow: '0 2px 4px rgba(0,0,0,0.9)'}}>
             {isLoading ? (
-              <span className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 text-purple-400">
                 <span className="animate-pulse">Generating response</span>
                 <span className="animate-bounce">.</span>
                 <span className="animate-bounce" style={{animationDelay: '0.2s'}}>.</span>
@@ -288,9 +335,9 @@ export default function Game() {
           </p>
           
           {currentContent?.hpChangeReason && (
-            <div className="mt-6 text-red-300 italic border-l-4 border-red-500 pl-5 bg-gradient-to-r from-red-950/50 to-transparent py-3 rounded-r-lg backdrop-blur-sm animate-fade-in">
-              <span className="text-xl mr-2">⚠️</span>
-              {currentContent.hpChangeReason}
+            <div className="mt-6 text-red-300 italic border-l-4 border-red-500 pl-5 bg-gradient-to-r from-red-950/50 to-transparent py-3 rounded-r-lg backdrop-blur-sm animate-fade-in relative z-10 flicker">
+              <span className="text-xl mr-2 inline-block" style={{animation: 'glitch 0.3s infinite'}}>⚠️</span>
+              <span style={{textShadow: '0 0 10px rgba(239, 68, 68, 0.5)'}}>{currentContent.hpChangeReason}</span>
             </div>
           )}
         </div>
@@ -337,12 +384,14 @@ export default function Game() {
                 key={i}
                 onClick={() => handleChoice(choice.label)}
                 disabled={isLoading}
-                className="group relative p-5 text-left border-2 border-zinc-700/50 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90 hover:from-zinc-800/90 hover:to-zinc-700/90 hover:border-blue-500/70 transition-all duration-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-md shadow-lg hover:shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
+                className="group relative p-5 text-left border-2 border-purple-900/40 bg-black/80 hover:bg-purple-950/40 hover:border-purple-700/60 transition-all duration-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-md shadow-lg hover:shadow-purple-900/40 hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
+                style={{boxShadow: '0 0 20px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(75, 0, 75, 0.1)'}}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-900/0 via-purple-800/20 to-purple-900/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative flex items-start gap-3">
-                  <span className="text-blue-400 text-xl font-bold group-hover:text-blue-300 transition-colors">▶</span>
-                  <span className="flex-1 group-hover:text-white transition-colors">{choice.label}</span>
+                  <span className="text-purple-500 text-xl font-bold group-hover:text-purple-400 transition-colors flicker">▶</span>
+                  <span className="flex-1 text-zinc-300 group-hover:text-zinc-100 transition-colors">{choice.label}</span>
                 </span>
               </button>
             ))}
@@ -351,16 +400,16 @@ export default function Game() {
         
         {/* Status Text */}
         {isLoading && (
-           <div className="flex items-center justify-center gap-3 text-sm text-zinc-500 animate-pulse bg-zinc-900/30 backdrop-blur-sm py-3 rounded-lg border border-zinc-800/30">
+           <div className="flex items-center justify-center gap-3 text-sm text-purple-300 animate-pulse bg-zinc-900/30 backdrop-blur-sm py-3 rounded-lg border border-purple-800/30 shadow-lg shadow-purple-900/20">
              <div className="w-2 h-2 bg-purple-500 rounded-full animate-ping" />
-             Processing neural input...
+             <span className="flicker">Processing neural input...</span>
            </div>
         )}
       </div>
 
       {/* Footer */}
       <footer className="w-full py-3 text-center text-xs text-zinc-500 border-t border-zinc-800/30 backdrop-blur-sm mt-auto">
-        Made with ❤️ by <a href="https://github.com/Jayanta2004" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">Jayanta</a>
+        Made with <span className="text-red-500 animate-pulse">❤️</span> by <a href="https://github.com/Jayanta2004" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors hover:underline">Jayanta</a>
       </footer>
     </div>
   );

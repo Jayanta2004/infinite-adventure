@@ -1,6 +1,7 @@
 # 👻 Infinite Adventure
 
-> An AI-powered infinite text adventure game with dynamic storytelling, haunted atmosphere, and persistent game saves in a bizarre corrupted simulation.
+> ⚠️ **WARNING: NEURAL LINK CORRUPTED** ⚠️  
+> An AI-powered infinite text adventure game where reality glitches, shadows whisper, and every choice echoes through a haunted digital void. Your consciousness has been trapped in a bizarre corrupted simulation. Can you survive the descent into madness?
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
@@ -8,13 +9,13 @@
 
 ## ✨ Features
 
-- 🤖 **AI-Powered Storytelling** - Dynamic narrative generation using AI
-- 💾 **Auto-Save System** - Progress automatically saved to Supabase
-- ❤️ **Health System** - Dynamic HP tracking with visual feedback
-- 🎒 **Inventory Management** - Collect and use items throughout your journey
-- 🏆 **Achievement System** - Unlock achievements as you progress
-- 👻 **Haunted UI** - Eerie, otherworldly interface with ghostly animations and corrupted aesthetics
-- 📱 **Responsive Design** - Play on any device
+- 🤖 **AI-Powered Storytelling** - The simulation generates twisted narratives that adapt to your every move
+- 💾 **Auto-Save System** - Your corrupted memories persist in the void (Supabase)
+- ❤️ **Health System** - Watch your vital signs flicker as reality tears at your sanity
+- 🎒 **Inventory Management** - Collect cursed artifacts and forbidden items from the glitched realm
+- 🏆 **Achievement System** - Unlock dark secrets as you descend deeper into the corruption
+- 👻 **Haunted UI** - Ghostly animations, eerie purple haze, and reality-bending visual effects
+- 📱 **Responsive Design** - The nightmare follows you on any device
 
 ## 🚀 Getting Started
 
@@ -71,11 +72,12 @@
 
 ## 🎯 How to Play
 
-1. Click **"ENTER SIMULATION"** to start your adventure
-2. Read the narrative and choose your actions
-3. Manage your health and inventory
-4. Your progress is automatically saved
-5. If you die, you can restart with a fresh save
+1. 💀 Click **"ENTER SIMULATION"** to breach the corrupted neural link
+2. 📖 Read the twisted narrative as reality warps around you
+3. ⚡ Choose your actions carefully - every decision has consequences
+4. 🩸 Monitor your vital signs and manage your cursed inventory
+5. 💾 Your progress auto-saves in the void... but can you trust it?
+6. ☠️ If you die, the simulation resets... or does it?
 
 ## 🛠️ Tech Stack
 
@@ -190,4 +192,4 @@ Have questions or suggestions? Feel free to open an issue or reach out!
 
 ---
 
-**Happy Adventuring! 🚀**
+**Enter if you dare... 👻💀🌑**

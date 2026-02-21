@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0015;
-  --foreground: #fafafa;
+  --background: #000000;
+  --foreground: #b8b8b8;
+  --glitch-color-1: #ff00ff;
+  --glitch-color-2: #00ffff;
+  --fog-color: rgba(139, 0, 139, 0.3);
 }
 
 @theme inline {
@@ -18,6 +21,8 @@ body {
   font-family: var(--font-mono), monospace;
   overflow-x: hidden;
   position: relative;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="rgba(139,0,139,0.3)" stroke="rgba(139,0,139,0.8)" stroke-width="1"/></svg>'), auto;
 }
 
 body::before {
@@ -25,12 +30,14 @@ body::before {
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(139, 0, 139, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(0, 100, 0, 0.1) 0%, transparent 40%);
-  animation: hauntedPulse 8s ease-in-out infinite;
+    radial-gradient(circle at 20% 80%, rgba(75, 0, 75, 0.4) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(50, 0, 80, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 40% 40%, rgba(0, 50, 0, 0.2) 0%, transparent 35%),
+    radial-gradient(circle at 60% 60%, rgba(139, 0, 139, 0.15) 0%, transparent 50%);
+  animation: hauntedPulse 12s ease-in-out infinite;
   pointer-events: none;
   z-index: 1;
+  filter: blur(60px);
 }
 
 body::after {
@@ -38,15 +45,17 @@ body::after {
   position: fixed;
   inset: 0;
   background-image: 
-    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 0, 139, 0.03) 2px, rgba(139, 0, 139, 0.03) 4px);
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 0, 139, 0.04) 2px, rgba(139, 0, 139, 0.04) 4px);
   animation: scanlines 8s linear infinite;
   pointer-events: none;
   z-index: 2;
+  opacity: 0.6;
 }
 
 @keyframes hauntedPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.1); }
+  33% { opacity: 0.8; transform: scale(1.05); }
+  66% { opacity: 0.6; transform: scale(1.12); }
 }
 
 @keyframes scanlines {
@@ -62,8 +71,78 @@ body::after {
 }
 
 @keyframes eerieGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(139, 0, 139, 0.3), 0 0 40px rgba(75, 0, 130, 0.2); }
-  50% { box-shadow: 0 0 40px rgba(139, 0, 139, 0.5), 0 0 80px rgba(75, 0, 130, 0.3); }
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(139, 0, 139, 0.4), 0 0 40px rgba(75, 0, 130, 0.3);
+    filter: brightness(1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(139, 0, 139, 0.6), 0 0 80px rgba(75, 0, 130, 0.4), 0 0 120px rgba(139, 0, 139, 0.2);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.8; }
+  43% { opacity: 1; }
+  45% { opacity: 0.9; }
+  46% { opacity: 1; }
+}
+
+@keyframes textGlitch {
+  0% { text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75); }
+  14% { text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75); }
+  15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 255, 0.75), 0.05em 0.025em 0 rgba(0, 255, 255, 0.75); }
+  49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 255, 0.75), 0.05em 0.025em 0 rgba(0, 255, 255, 0.75); }
+  50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 255, 0.75), -0.025em -0.05em 0 rgba(0, 255, 255, 0.75); }
+  99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 255, 0.75), -0.025em -0.05em 0 rgba(0, 255, 255, 0.75); }
+  100% { text-shadow: -0.025em 0 0 rgba(255, 0, 255, 0.75), -0.025em -0.025em 0 rgba(0, 255, 255, 0.75); }
+}
+
+@keyframes staticNoise {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.1; }
+}
+
+@keyframes fogDrift {
+  0% { transform: translateX(-100%) translateY(0); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translateX(100%) translateY(-20px); opacity: 0; }
+}
+
+@keyframes creepyFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.1; }
+  25% { transform: translateY(-30px) rotate(5deg); opacity: 0.3; }
+  50% { transform: translateY(-15px) rotate(-5deg); opacity: 0.15; }
+  75% { transform: translateY(-40px) rotate(3deg); opacity: 0.25; }
+}
+
+@keyframes whisper {
+  0%, 100% { opacity: 0; transform: translateY(0); }
+  50% { opacity: 0.4; transform: translateY(-10px); }
+}
+
+@keyframes shadowPulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(139, 0, 139, 0.2); }
+  50% { box-shadow: 0 0 60px rgba(0, 0, 0, 0.7), inset 0 0 50px rgba(139, 0, 139, 0.3); }
+}
+
+@keyframes bloodDrip {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(100vh); opacity: 0; }
 }
 
 /* Hide Next.js development indicator */
@@ -92,6 +171,18 @@ nextjs-portal,
   animation: fade-in 0.6s ease-out forwards;
 }
 
+.glitch-text {
+  animation: textGlitch 0.3s infinite;
+}
+
+.flicker {
+  animation: flicker 3s infinite;
+}
+
+.static-noise {
+  animation: staticNoise 0.5s infinite;
+}
+
 /* Smooth scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -108,4 +199,46 @@ nextjs-portal,
 
 ::-webkit-scrollbar-thumb:hover {
   background: #52525b;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(139, 0, 139, 0.5);
+  color: #fff;
+}
+
+/* Vignette effect */
+.vignette {
+  position: relative;
+}
+
+.vignette::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  box-shadow: inset 0 0 250px rgba(0, 0, 0, 0.95), inset 0 0 100px rgba(75, 0, 75, 0.3);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Fog layers */
+.fog-layer {
+  position: fixed;
+  width: 200%;
+  height: 200px;
+  background: linear-gradient(90deg, transparent, var(--fog-color), transparent);
+  pointer-events: none;
+  filter: blur(40px);
+  opacity: 0;
+  animation: fogDrift 30s linear infinite;
+}
+
+.fog-layer:nth-child(2) {
+  animation-delay: 10s;
+  animation-duration: 35s;
+}
+
+.fog-layer:nth-child(3) {
+  animation-delay: 20s;
+  animation-duration: 40s;
 }
